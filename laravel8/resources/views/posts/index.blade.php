@@ -3,6 +3,8 @@
 @section('title', 'Blog Posts')
 
 @section('content')
+    {{-- @each('posts.partials.post', $posts, 'post') --}}
+
     {{-- @if (count($posts))
         @foreach ($posts as $key => $post)
             <div>{{ $key }}. {{ $post['title'] }}</div>
