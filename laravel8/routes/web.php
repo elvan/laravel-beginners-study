@@ -24,7 +24,18 @@ $posts = [
         'title' => 'Intro to PHP',
         'content' => 'This is a short intro to PHP',
         'is_new' => false,
-    ]
+    ],
+    3 => [
+        'title' => 'Intro to Vue',
+        'content' => 'This is a short intro to Vue',
+        'is_new' => true,
+        'has_comments' => true,
+    ],
+    4 => [
+        'title' => 'Intro to React',
+        'content' => 'This is a short intro to React',
+        'is_new' => false,
+    ],
 ];
 
 // Route::get('/', function () {
