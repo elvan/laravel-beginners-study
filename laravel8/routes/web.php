@@ -38,18 +38,12 @@ $posts = [
   ],
 ];
 
-// Route::get('/', function () {
-//     return view('home.index');
-// })->name('home.index');
-
-// Route::get('/contact', function () {
-//     return view('home.contact');
-// })->name('home.contact');
-
 Route::view('/', 'home.index')->name('home.index');
 Route::view('/contact', 'home.contact')->name('home.contact');
 
 Route::get('/posts', function () use ($posts) {
+  //   dd(request()->all());
+  dd((int) request()->query('page', 1));
   return view('posts.index', ['posts' => $posts]);
 })->name('posts.index');
 
