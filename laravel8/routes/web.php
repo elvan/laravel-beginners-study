@@ -70,7 +70,7 @@ Route::get('/fun/responses', function () use ($posts) {
 });
 
 Route::get('/fun/redirect', function () {
-  return redirect(('/contact'));
+  return redirect('/contact');
 });
 
 Route::get('/fun/back', function () {
