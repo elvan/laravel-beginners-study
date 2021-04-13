@@ -3,19 +3,9 @@
 @section('title', 'Blog Posts')
 
 @section('content')
-    {{-- @each('posts.partials.post', $posts, 'post') --}}
-
-    {{-- @if (count($posts))
-        @foreach ($posts as $key => $post)
-            <div>{{ $key }}. {{ $post['title'] }}</div>
-        @endforeach
-    @else
-        No posts found!
-    @endif --}}
-
-    @forelse ($posts as $key => $post)
-        @include('posts.partials.post')
-    @empty
-        No posts found!
-    @endforelse
+  @forelse ($posts as $key => $post)
+    @include('posts.partials.post')
+  @empty
+    No posts found!
+  @endforelse
 @endsection
