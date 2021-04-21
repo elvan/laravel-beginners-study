@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,7 @@ $posts = [
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::get('/single', AboutController::class)->name('home.single');
 
 Route::get('/posts', function () use ($posts) {
     //   dd(request()->all());
