@@ -41,7 +41,9 @@ $posts = [
     ],
 ];
 
-Route::resource('posts', PostsController::class)->only(['index', 'show']);
+Route::resource('posts', PostsController::class)->only([
+    'index', 'show', 'create', 'store'
+]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
