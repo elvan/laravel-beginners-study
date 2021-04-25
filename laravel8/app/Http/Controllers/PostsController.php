@@ -35,6 +35,10 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'bail|required|min:5|max:100',
+            'content' => 'bail|required|min:100'
+        ]);
         $post = new BlogPost();
         $post->title = $request->input('title');
         $post->content = $request->input('content');
