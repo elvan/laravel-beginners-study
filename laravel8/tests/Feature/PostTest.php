@@ -34,8 +34,20 @@ class PostTest extends TestCase
 
         $this->assertDatabaseHas('blog_posts', [
             'title' => 'Title for the new blog post',
-            'Content' => 'Content of the blog post',
+            'content' => 'Content of the blog post',
         ]);
         $response->assertSeeText('Title for the new blog post');
+    }
+
+    public function testStoreValid()
+    {
+        $params = [
+            'title' => 'Title for the new blog post',
+            'content' => 'Content of the blog post',
+        ];
+        $this->post('/posts', $params)
+            ->assertStatus(302)
+            ->assertSessionHas('status');
+        $this->assertEquals(session('status'), 'The blog post was created!');
     }
 }
