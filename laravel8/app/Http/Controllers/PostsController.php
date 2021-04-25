@@ -39,6 +39,7 @@ class PostsController extends Controller
             'title' => 'bail|required|min:5|max:100',
             'content' => 'bail|required|min:100'
         ]);
+
         $post = new BlogPost();
         $post->title = $request->input('title');
         $post->content = $request->input('content');
