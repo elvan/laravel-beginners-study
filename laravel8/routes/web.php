@@ -41,24 +41,11 @@ $posts = [
     ],
 ];
 
-Route::resource('posts', PostsController::class)->only([
-    'index', 'show', 'create', 'store', 'edit', 'update'
-]);
+Route::resource('posts', PostsController::class);
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 Route::get('/single', AboutController::class)->name('home.single');
-
-// Route::get('/posts', function () use ($posts) {
-//     //   dd(request()->all());
-//     dd((int) request()->query('page', 1));
-//     return view('posts.index', ['posts' => $posts]);
-// })->name('posts.index');
-
-// Route::get('/posts/{id}', function ($id) use ($posts) {
-//     abort_if(!isset($posts[$id]), 404);
-//     return view('posts.show', ['post' => $posts[$id]]);
-// })->name('posts.show');
 
 Route::get('/recent-posts/{days_ago?}', function ($daysAgo = 20) {
     return 'Posts from ' . $daysAgo . ' days ago';
