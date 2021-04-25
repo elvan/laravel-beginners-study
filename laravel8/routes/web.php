@@ -42,7 +42,7 @@ $posts = [
 ];
 
 Route::resource('posts', PostsController::class)->only([
-    'index', 'show', 'create', 'store'
+    'index', 'show', 'create', 'store', 'edit', 'update'
 ]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
