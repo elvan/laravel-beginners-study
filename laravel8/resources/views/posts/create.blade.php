@@ -5,11 +5,13 @@
 @section('content')
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf
-        <div><input name="title" type="text"></div>
+        <div><input name="title" type="text" value="{{ old('title') }}"></div>
         @error('title')
             <div>{{ $message }}</div>
         @enderror
-        <div><textarea name="content" id="content" cols="30" rows="10"></textarea></div>
+        <div>
+            <textarea name="content" id="content" cols="30" rows="10">{{ old('content') }}</textarea>
+        </div>
         @if ($errors->any())
             <div>
                 <ul>
