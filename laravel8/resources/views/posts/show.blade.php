@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
-@section('title', $post['title'])
+@section('title', $post->title)
 
 @section('content')
-    <h1>{{ $post['title'] }}</h1>
-    <p>{{ $post['content'] }}</p>
+    <h1>{{ $post->title }}</h1>
+    <p>{{ $post->content }}</p>
+    <p>Added {{ $post->created_at->diffForHumans() }}</p>
 
-    @isset($post['has_comments'])
-        <div>The post has some comments... using isset</div>
-    @endisset
+    @if (now()->diffInMinutes($post->created_at) < 5)
+        <div class="alert alert-info">New</div>
+    @endif
 @endsection
