@@ -34,6 +34,7 @@ class PostTest extends TestCase
             'content' => 'Content of the blog post',
         ]);
         $response->assertSeeText('Title for the new blog post');
+        $response->assertSeeText('No comments yet');
     }
 
     public function testStoreValid()
