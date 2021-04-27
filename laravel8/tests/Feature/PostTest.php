@@ -32,10 +32,10 @@ class PostTest extends TestCase
         $response = $this->get('/posts');
 
         $this->assertDatabaseHas('blog_posts', [
-            'title' => 'Title for the new blog post',
+            'title' => 'New title',
             'content' => 'Content of the blog post',
         ]);
-        $response->assertSeeText('Title for the new blog post');
+        $response->assertSeeText('New title');
         $response->assertSeeText('No comments yet');
     }
 
@@ -83,7 +83,7 @@ class PostTest extends TestCase
         $post = $this->createDummyBlogPost();
 
         $this->assertDatabaseHas('blog_posts', [
-            'title' => 'Title for the new blog post',
+            'title' => 'New title',
             'content' => 'Content of the blog post',
         ]);
 
@@ -102,7 +102,7 @@ class PostTest extends TestCase
             'content' => 'A new content of the blog post',
         ]);
         $this->assertDatabaseMissing('blog_posts', [
-            'title' => 'Title for the new blog post',
+            'title' => 'New title',
             'content' => 'Content of the blog post',
         ]);
     }
@@ -116,18 +116,18 @@ class PostTest extends TestCase
         $response->assertStatus(302);
         $response->assertSessionHas('status', 'The blog post was deleted!');
         $this->assertDatabaseMissing('blog_posts', [
-            'title' => 'Title for the new blog post',
+            'title' => 'New title',
             'content' => 'Content of the blog post',
         ]);
     }
 
     private function createDummyBlogPost(): BlogPost
     {
-        $post = new BlogPost();
-        $post->title = 'Title for the new blog post';
-        $post->content = 'Content of the blog post';
-        $post->save();
+        // $post = new BlogPost();
+        // $post->title = 'Title for the new blog post';
+        // $post->content = 'Content of the blog post';
+        // $post->save();
 
-        return $post;
+        return BlogPost::factory()->newTitle()->create();
     }
 }
