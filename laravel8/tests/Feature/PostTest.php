@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\BlogPost;
+use App\Models\Comment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -10,20 +11,21 @@ use Tests\TestCase;
 class PostTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
 
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function testNoBlogPostWhenNothingInDatabase()
+    public function test_show_info_when_blog_post_is_empty()
     {
         $response = $this->get('/posts');
 
         $response->assertSeeText('No blog posts yet!');
     }
 
-    public function testSee1BlogPostWhenThereIs1InDatabase()
+    public function test_blog_post_with_no_comments()
     {
         $this->createDummyBlogPost();
 
@@ -37,7 +39,19 @@ class PostTest extends TestCase
         $response->assertSeeText('No comments yet');
     }
 
-    public function testStoreValid()
+    public function test_blog_post_with_a_comment()
+    {
+        $post = $this->createDummyBlogPost();
+        Comment::factory()->count(3)->create([
+            'blog_post_id' => $post->id
+        ]);
+
+        $response = $this->get('/posts');
+
+        $response->assertSeeText('3 comments');
+    }
+
+    public function test_saving_a_valid_post()
     {
         $params = [
             'title' => 'Title for the new blog post',
@@ -49,7 +63,7 @@ class PostTest extends TestCase
         $this->assertEquals(session('status'), 'The blog post was created!');
     }
 
-    public function testStoreFails()
+    public function test_error_messages_for_an_invalid_post()
     {
         $params = [
             'title' => 'X',
@@ -64,7 +78,7 @@ class PostTest extends TestCase
         $this->assertEquals($messages['content'][0], 'The content must be at least 10 characters.');
     }
 
-    public function testUpdateValid()
+    public function test_updating_with_valid_input()
     {
         $post = $this->createDummyBlogPost();
 
@@ -93,7 +107,7 @@ class PostTest extends TestCase
         ]);
     }
 
-    public function testDelete()
+    public function test_deleting_a_blog_post()
     {
         $post = $this->createDummyBlogPost();
 
