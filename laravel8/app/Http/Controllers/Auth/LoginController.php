@@ -37,4 +37,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // // Example of customizing the db used for auth
+    // public function username()
+    // {
+    //     return 'username';
+    // }
 }
