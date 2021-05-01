@@ -57,9 +57,12 @@ class PostTest extends TestCase
             'title' => 'Title for the new blog post',
             'content' => 'Content of the blog post',
         ];
-        $this->post('/posts', $params)
-            ->assertStatus(302)
-            ->assertSessionHas('status');
+
+        $response = $this->actingAs($this->user())
+            ->post('/posts', $params);
+
+        $response->assertStatus(302);
+        $response->assertSessionHas('status');
         $this->assertEquals(session('status'), 'The blog post was created!');
     }
 
@@ -69,9 +72,12 @@ class PostTest extends TestCase
             'title' => 'X',
             'content' => 'C',
         ];
-        $this->post('/posts', $params)
-            ->assertStatus(302)
-            ->assertSessionHas('errors');
+
+        $response = $this->actingAs($this->user())
+            ->post('/posts', $params);
+
+        $response->assertStatus(302);
+        $response->assertSessionHas('errors');
         $messages = session('errors')->getMessages();
 
         $this->assertEquals($messages['title'][0], 'The title must be at least 5 characters.');
@@ -92,7 +98,8 @@ class PostTest extends TestCase
             'content' => 'A new content of the blog post',
         ];
 
-        $response = $this->put("/posts/{$post->id}", $params);
+        $response = $this->actingAs($this->user())
+            ->put("/posts/{$post->id}", $params);
 
         $response->assertStatus(302);
         $response->assertSessionHas('status', 'The blog post was updated!');
@@ -111,7 +118,8 @@ class PostTest extends TestCase
     {
         $post = $this->createDummyBlogPost();
 
-        $response = $this->delete("/posts/{$post->id}");
+        $response = $this->actingAs($this->user())
+            ->delete("/posts/{$post->id}");
 
         $response->assertStatus(302);
         $response->assertSessionHas('status', 'The blog post was deleted!');
