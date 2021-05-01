@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,3 +85,5 @@ Route::prefix('/fun')
             return response()->download(public_path('/favicon.ico'));
         })->name('download');
     });
+
+Auth::routes();
