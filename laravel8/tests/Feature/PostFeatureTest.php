@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class PostTest extends TestCase
+class PostFeatureTest extends TestCase
 {
     use RefreshDatabase;
     use WithFaker;
@@ -81,7 +81,8 @@ class PostTest extends TestCase
 
     public function test_updating_with_valid_input()
     {
-        $post = $this->createDummyBlogPost();
+        $user = $this->user();
+        $post = $this->createDummyBlogPost($user->id);
 
         $this->assertDatabaseHas('blog_posts', [
             'title' => 'New title',
@@ -93,7 +94,7 @@ class PostTest extends TestCase
             'content' => 'A new content of the blog post',
         ];
 
-        $response = $this->actingAs($this->user())
+        $response = $this->actingAs($user)
             ->put("/posts/{$post->id}", $params);
 
         $response->assertStatus(302);
@@ -111,9 +112,10 @@ class PostTest extends TestCase
 
     public function test_deleting_a_blog_post()
     {
-        $post = $this->createDummyBlogPost();
+        $user = $this->user();
+        $post = $this->createDummyBlogPost($user->id);
 
-        $response = $this->actingAs($this->user())
+        $response = $this->actingAs($user)
             ->delete("/posts/{$post->id}");
 
         $response->assertStatus(302);
@@ -124,8 +126,10 @@ class PostTest extends TestCase
         ]);
     }
 
-    private function createDummyBlogPost(): BlogPost
+    private function createDummyBlogPost($userId = null): BlogPost
     {
-        return BlogPost::factory()->newTitle()->create();
+        return BlogPost::factory()->newTitle()->create([
+            'user_id' => $userId ?? $this->user()->id,
+        ]);
     }
 }
