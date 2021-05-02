@@ -8,10 +8,14 @@
 @endif
 
 <div class="mb-3">
-    <a class="btn btn-primary" href="{{ route('posts.edit', ['post' => $post->id]) }}">Edit</a>
-    <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="d-inline" method="POST">
-        @csrf
-        @method('DELETE')
-        <input class="btn btn-danger" type="submit" value="Delete" />
-    </form>
+    @can('update', $post)
+        <a class="btn btn-primary" href="{{ route('posts.edit', ['post' => $post->id]) }}">Edit</a>
+    @endcan
+    @can('delete', $post)
+        <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="d-inline" method="POST">
+            @csrf
+            @method('DELETE')
+            <input class="btn btn-danger" type="submit" value="Delete" />
+        </form>
+    @endcan
 </div>
