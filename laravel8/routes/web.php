@@ -46,6 +46,10 @@ Route::resource('posts', PostController::class);
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::get('/secret', [HomeController::class, 'secret'])
+    ->name('home.secret')
+    ->middleware('can:home.secret');
+
 Route::get('/single', AboutController::class)->name('home.single');
 
 Route::get('/recent-posts/{days_ago?}', function ($daysAgo = 20) {

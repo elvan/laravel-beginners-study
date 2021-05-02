@@ -14,9 +14,9 @@
         <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{{ route('home.index') }}">Laravel App</a></h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="{{ route('home.index') }}">Home</a>
-            <a class="p-2 text-dark" href="{{ route('home.contact') }}">Contact</a>
             <a class="p-2 text-dark" href="{{ route('posts.index') }}">Posts</a>
             <a class="p-2 text-dark" href="{{ route('posts.create') }}">Add</a>
+            <a class="p-2 text-dark" href="{{ route('home.contact') }}">Contact</a>
             @guest
                 @if (Route::has('register'))
                     <a class="p-2 text-dark" href="{{ route('register') }}">Register</a>
