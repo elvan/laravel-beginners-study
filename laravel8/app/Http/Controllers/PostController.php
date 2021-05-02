@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
-use Illuminate\Support\Facades\Gate;
-
-// use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -25,19 +22,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        // DB::connection()->enableQueryLog();
-
-        // $posts = BlogPost::with('comments')->get();
-
-        // foreach ($posts as $post) {
-        //     foreach ($post->comments as $comment) {
-        //         echo $comment->content;
-        //     }
-        // }
-
-        // dd(DB::getQueryLog());
-
-        // comments_count
         return view(
             'posts.index',
             ['posts' => BlogPost::withCount('comments')->get()]
@@ -91,7 +75,7 @@ class PostController extends Controller
     {
         $post = BlogPost::findOrFail($id);
 
-        $this->authorize('posts.update', $post);
+        $this->authorize($post);
 
         return view('posts.edit', ['post' => $post]);
     }
@@ -106,13 +90,11 @@ class PostController extends Controller
     public function update(StorePost $request, $id)
     {
         $post = BlogPost::findOrFail($id);
-
-        $this->authorize('posts.update', $post);
-
         $validated = $request->validated();
+
+        $this->authorize($post);
         $post->fill($validated);
         $post->save();
-
         $request->session()->flash('status', 'The blog post was updated!');
 
         return redirect()->route('posts.show', ['post' => $post->id]);
@@ -128,7 +110,7 @@ class PostController extends Controller
     {
         $post = BlogPost::findOrFail($id);
 
-        $this->authorize('posts.delete', $post);
+        $this->authorize($post);
         $post->delete();
         session()->flash('status', 'The blog post was deleted!');
 
