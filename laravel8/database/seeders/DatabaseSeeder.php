@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\BlogPost;
-use App\Models\Comment;
-use App\Models\User;
+use Database\Seeders\BlogPostSeeder;
+use Database\Seeders\CommentSeeder;
+use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
