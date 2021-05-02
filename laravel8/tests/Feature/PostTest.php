@@ -13,11 +13,6 @@ class PostTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_show_info_when_blog_post_is_empty()
     {
         $response = $this->get('/posts');
@@ -123,7 +118,7 @@ class PostTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertSessionHas('status', 'The blog post was deleted!');
-        $this->assertDatabaseMissing('blog_posts', [
+        $this->assertSoftDeleted('blog_posts', [
             'title' => 'New title',
             'content' => 'Content of the blog post',
         ]);
@@ -131,11 +126,6 @@ class PostTest extends TestCase
 
     private function createDummyBlogPost(): BlogPost
     {
-        // $post = new BlogPost();
-        // $post->title = 'Title for the new blog post';
-        // $post->content = 'Content of the blog post';
-        // $post->save();
-
         return BlogPost::factory()->newTitle()->create();
     }
 }
