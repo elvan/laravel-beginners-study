@@ -51,6 +51,7 @@ class UserFactory extends Factory
             return [
                 'name' => 'Example User',
                 'email' => 'user@example.com',
+                'is_admin' => true,
             ];
         });
     }

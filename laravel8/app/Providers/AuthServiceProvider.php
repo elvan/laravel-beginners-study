@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\BlogPost;
-use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,6 +24,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Gate::before(function ($user, $ability) {
+            if ($user->is_admin && in_array($ability, ['update-post'])) {
+                return true;
+            }
+        });
 
         Gate::define('update-post', function ($user, $post) {
             return $user->id == $post->user_id;
