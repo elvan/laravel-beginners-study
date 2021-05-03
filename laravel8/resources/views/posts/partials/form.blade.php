@@ -10,7 +10,11 @@
     <textarea class="form-control" name="content" id="content"
         rows="15">{{ old('content', optional($post ?? null)->content) }}</textarea>
 </div>
-@if ($errors->any())
+@error('content')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
+{{-- @if ($errors->any())
     <div class="mb-3">
         <ul class="list-group">
             @foreach ($errors->all() as $error)
@@ -18,4 +22,4 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif --}}
