@@ -4,7 +4,13 @@
 
 @section('content')
     <h1>{{ $post->title }}</h1>
-    <p>{{ $post->content }}</p>
+
+    {{-- <p>{{ $post->content }}</p> --}}
+    <?php $paragraphs = preg_split('#\R+#', $post->content); ?>
+    @foreach ($paragraphs as $paragraph)
+        <p>{{ $paragraph }}</p>
+    @endforeach
+
     <p class="text-muted">Added {{ $post->created_at->diffForHumans() }}</p>
 
     @if (now()->diffInMinutes($post->created_at) < 5)
