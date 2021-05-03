@@ -16,7 +16,7 @@ class BlogPostSeeder extends Seeder
      */
     public function run()
     {
-        $postsCount = (int) $this->command->ask('How many blog posts would you create?', 50);
+        $postsCount = (int) $this->command->ask('How many blog posts would you create?', 100);
 
         $users = User::all();
         for ($i = $postsCount; $i > 0; $i--) {

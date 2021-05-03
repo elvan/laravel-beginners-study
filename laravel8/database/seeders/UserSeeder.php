@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $userCount = max((int) $this->command->ask('How many users would you create?', 9), 1);
+        $userCount = max((int) $this->command->ask('How many users would you create?', 19), 1);
         User::factory()->exampleUser()->create();
         for ($i = $userCount; $i > 0; $i--) {
             User::factory()->create([
