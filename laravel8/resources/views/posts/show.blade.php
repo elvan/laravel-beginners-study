@@ -14,9 +14,7 @@
     <p class="text-muted">Added {{ $post->created_at->diffForHumans() }}</p>
 
     @if (now()->diffInMinutes($post->created_at) < 5)
-        @component('badge', ['type' => 'primary'])
-            New!
-        @endcomponent
+        <x-badge type="success" :message="'New!'" />
     @endif
 
     <h4>Comments</h4>
