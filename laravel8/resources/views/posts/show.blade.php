@@ -16,7 +16,7 @@
         <p>{{ $paragraph }}</p>
     @endforeach
 
-    <p class="text-muted">Added {{ $post->created_at->diffForHumans() }}</p>
+    <x-updated :date="$post->created_at" :name="$post->user->name" />
 
     <h4>Comments</h4>
     <div>
@@ -26,7 +26,8 @@
                 <p>{{ $line }}</p>
             @endforeach
 
-            <p class="text-muted"> added {{ $comment->created_at->diffForHumans() }}</p>
+            <x-updated :date="$comment->created_at" />
+            <x-updated :date="$comment->updated_at">Updated</x-updated>
             <hr>
         @empty
             <p>No comments yet!</p>
