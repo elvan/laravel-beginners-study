@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::latest()->withCount('comments')->get();
+        $posts = BlogPost::latest()->withCount('comments')->with('user')->get();
         $mostCommented = BlogPost::mostCommented()->take(5)->get();
         $mostActiveUsers = User::withMostBlogPosts()->take(5)->get();
         $mostActiveUsersLastMonth = User::withMostBlogPostsLastMonth()->take(5)->get();
