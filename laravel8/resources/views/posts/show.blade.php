@@ -20,7 +20,12 @@
     <h4>Comments</h4>
     <div>
         @forelse ($post->comments as $comment)
-            <p>{{ $comment->content }}</p>
+            {{-- <p>{{ $comment->content }}</p> --}}
+            <?php $lines = preg_split('#\R+#', $comment->content); ?>
+            @foreach ($lines as $line)
+                <p>{{ $line }}</p>
+            @endforeach
+
             <p class="text-muted"> added {{ $comment->created_at->diffForHumans() }}</p>
             <hr>
         @empty
