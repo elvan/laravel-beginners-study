@@ -22,10 +22,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view(
-            'posts.index',
-            ['posts' => BlogPost::withCount('comments')->get()]
-        );
+        $posts = BlogPost::withCount('comments')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -63,7 +64,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('posts.show', ['post' => BlogPost::with('comments')->findOrFail($id)]);
+        $post = BlogPost::with('comments')->findOrFail($id);
+
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
@@ -98,7 +101,7 @@ class PostController extends Controller
         $post->save();
         $request->session()->flash('status', 'The blog post was updated!');
 
-        return redirect()->route('posts.show', ['post' => $post->id]);
+        return redirect()->route('posts.show', ['post' => $post]);
     }
 
     /**
