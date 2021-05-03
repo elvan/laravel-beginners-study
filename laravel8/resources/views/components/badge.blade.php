@@ -1,5 +1,7 @@
-@props(['type' => 'info', 'message'])
+@props(['type' => 'info', 'message', 'show'])
 
-<div {{ $attributes->merge(['class' => 'badge badge-' . $type]) }}>
-    {{ $message }}
-</div>
+@if (!isset($show) || $show)
+    <span {{ $attributes->merge(['class' => 'badge badge-' . $type]) }}>
+        {{ $message }}
+    </span>
+@endif
