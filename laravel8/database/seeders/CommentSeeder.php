@@ -21,7 +21,7 @@ class CommentSeeder extends Seeder
             $this->command->info('There are no blog posts, so no comments will be added');
         }
 
-        $commentsCount = (int) $this->command->ask('How many comments would you create?', 200);
+        $commentsCount = (int) $this->command->ask('How many comments would you create?', 500);
 
         Comment::factory()->count($commentsCount)->make()->each(function ($comment) use ($posts) {
             $randomId = $posts->random()->id;
