@@ -22,7 +22,7 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'content' => $this->faker->text
+            'content' => $this->faker->paragraphs(rand(1, 3), true)
         ];
     }
 }
