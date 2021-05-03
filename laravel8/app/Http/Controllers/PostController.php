@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::withCount('comments')->get();
+        $posts = BlogPost::latest()->withCount('comments')->get();
 
         return view('posts.index', ['posts' => $posts]);
     }
@@ -62,7 +62,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = BlogPost::with('comments')->findOrFail($id);
+        // $post = BlogPost::with('comments')->findOrFail($id);
+        $post = BlogPost::with(['comments' => function ($query) {
+            return $query->latest();
+        }])->findOrFail($id);
 
         return view('posts.show', ['post' => $post]);
     }
