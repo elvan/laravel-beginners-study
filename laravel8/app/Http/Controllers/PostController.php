@@ -23,8 +23,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = BlogPost::latest()->withCount('comments')->get();
+        $mostCommented = BlogPost::mostCommented()->take(5)->get();
 
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index', [
+            'posts' => $posts,
+            'mostCommented' => $mostCommented,
+        ]);
     }
 
     /**
