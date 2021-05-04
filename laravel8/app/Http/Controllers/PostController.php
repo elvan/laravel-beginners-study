@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -24,9 +25,16 @@ class PostController extends Controller
     public function index()
     {
         $posts = BlogPost::latest()->withCount('comments')->with('user')->get();
-        $mostCommented = BlogPost::mostCommented()->take(5)->get();
-        $mostActiveUsers = User::withMostBlogPosts()->take(5)->get();
-        $mostActiveUsersLastMonth = User::withMostBlogPostsLastMonth()->take(5)->get();
+
+        $mostCommented = Cache::remember('mostCommented', now()->addMinute(), function () {
+            return BlogPost::mostCommented()->take(5)->get();
+        });
+        $mostActiveUsers = Cache::remember('mostActiveUsers', now()->addMinute(), function () {
+            return User::withMostBlogPosts()->take(5)->get();
+        });
+        $mostActiveUsersLastMonth = Cache::remember('mostActiveUsersLastMonth', now()->addMinute(), function () {
+            return User::withMostBlogPostsLastMonth()->take(5)->get();
+        });
 
         return view('posts.index', [
             'posts' => $posts,
