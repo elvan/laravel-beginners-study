@@ -26,13 +26,13 @@ class PostController extends Controller
     {
         $posts = BlogPost::latest()->withCount('comments')->with('user')->get();
 
-        $mostCommented = Cache::remember('mostCommented', now()->addMinute(), function () {
+        $mostCommented = Cache::remember('blog-post-most-commented', now()->addMinute(), function () {
             return BlogPost::mostCommented()->take(5)->get();
         });
-        $mostActiveUsers = Cache::remember('mostActiveUsers', now()->addMinute(), function () {
+        $mostActiveUsers = Cache::remember('users-most-active', now()->addMinute(), function () {
             return User::withMostBlogPosts()->take(5)->get();
         });
-        $mostActiveUsersLastMonth = Cache::remember('mostActiveUsersLastMonth', now()->addMinute(), function () {
+        $mostActiveUsersLastMonth = Cache::remember('users-most-active-last-month', now()->addMinute(), function () {
             return User::withMostBlogPostsLastMonth()->take(5)->get();
         });
 
@@ -79,12 +79,13 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        // $post = BlogPost::with('comments')->findOrFail($id);
-        $post = BlogPost::with(['comments' => function ($query) {
-            return $query->latest();
-        }])->findOrFail($id);
+        $blogPost = Cache::remember("blog-post-{$id}", now()->addMinute(), function () use ($id) {
+            return BlogPost::with(['comments' => function ($query) {
+                return $query->latest();
+            }])->findOrFail($id);
+        });
 
-        return view('posts.show', ['post' => $post]);
+        return view('posts.show', ['post' => $blogPost]);
     }
 
     /**
