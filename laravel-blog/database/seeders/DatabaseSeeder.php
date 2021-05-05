@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\BlogPostSeeder;
 use Database\Seeders\CommentSeeder;
+use Database\Seeders\TagsSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +26,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             BlogPostSeeder::class,
             CommentSeeder::class,
+            TagsSeeder::class,
+            BlogPostTagSeeder::class,
         ]);
     }
 }
