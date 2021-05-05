@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-8">
             @forelse ($posts as $key => $post)
-                @include('posts.partials.post')
+                @include('posts._post')
             @empty
                 No blog posts yet!
             @endforelse
