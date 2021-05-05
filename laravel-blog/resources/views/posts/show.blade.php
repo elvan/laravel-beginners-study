@@ -40,6 +40,8 @@
                 @endforelse
             </div>
 
+            @include('comments._form')
+
         </div>
 
         <div class="col-4">
