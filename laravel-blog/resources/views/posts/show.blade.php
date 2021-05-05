@@ -24,6 +24,8 @@
 
             <p>Currently read by {{ $counter }} people</p>
 
+            @include('comments._form')
+
             <h4>Comments</h4>
             <div>
                 @forelse ($post->comments as $comment)
@@ -39,8 +41,6 @@
                     <p>No comments yet!</p>
                 @endforelse
             </div>
-
-            @include('comments._form')
 
         </div>
 
