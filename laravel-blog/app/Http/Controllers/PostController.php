@@ -24,7 +24,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::latest()->withCount('comments')->with('user')->get();
+        $posts = BlogPost::latest()
+            ->withCount('comments')
+            ->with('user')
+            ->with('tags')
+            ->get();
 
         $mostCommented = Cache::remember('blog-post-most-commented', now()->addMinute(), function () {
             return BlogPost::mostCommented()->take(5)->get();
@@ -80,9 +84,10 @@ class PostController extends Controller
     public function show($id)
     {
         $blogPost = Cache::remember("blog-post-{$id}", now()->addMinute(), function () use ($id) {
-            return BlogPost::with(['comments' => function ($query) {
-                return $query->latest();
-            }])->findOrFail($id);
+            return BlogPost::with('comments')
+                ->with('user')
+                ->with('tags')
+                ->findOrFail($id);
         });
 
         $sessionId = session()->getId();
