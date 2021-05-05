@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostTagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,9 @@ $posts = [
 ];
 
 Route::resource('posts', PostController::class);
+
+Route::get('/posts/tag/{id}', [PostTagController::class, 'index'])
+    ->name('posts.tags.index');
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');

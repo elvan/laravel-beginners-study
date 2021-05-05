@@ -9,9 +9,9 @@ class Tag extends Model
 {
     use HasFactory;
 
-    public function blogPost()
+    public function blogPosts()
     {
-        $this->belongsToMany(BlogPost::class)
+        return $this->belongsToMany(BlogPost::class)
             ->withTimestamps()
             ->as('tagged');
     }
