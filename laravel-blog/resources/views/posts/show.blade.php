@@ -32,8 +32,8 @@
                         <p>{{ $line }}</p>
                     @endforeach
 
-                    <x-updated :date="$comment->created_at" />
-                    <x-updated :date="$comment->updated_at">Updated</x-updated>
+                    <x-updated :date="$comment->created_at" :name="$comment->user->name" />
+
                     <hr>
                 @empty
                     <p>No comments yet!</p>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Comment;
+use App\Models\Tag;
 use App\Models\User;
 use App\Scopes\DeletedAdminScope;
 use Illuminate\Database\Eloquent\Builder;

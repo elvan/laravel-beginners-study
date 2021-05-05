@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\BlogPost;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class CommentSeeder extends Seeder
@@ -16,6 +17,7 @@ class CommentSeeder extends Seeder
     public function run()
     {
         $posts = BlogPost::all();
+        $users = User::all();
 
         if ($posts->count() < 1) {
             $this->command->info('There are no blog posts, so no comments will be added');
@@ -23,12 +25,13 @@ class CommentSeeder extends Seeder
 
         $commentsCount = (int) $this->command->ask('How many comments would you create?', 500);
 
-        Comment::factory()->count($commentsCount)->make()->each(function ($comment) use ($posts) {
+        Comment::factory()->count($commentsCount)->make()->each(function ($comment) use ($posts, $users) {
             $randomId = $posts->random()->id;
             $post = BlogPost::find($randomId);
             $postCreatedAt = $post->created_at;
             $postCommentsCount = $post->comments()->count();
             $comment->blog_post_id = $randomId;
+            $comment->user_id = $users->random()->id;
             $comment->created_at = $postCreatedAt->addHour($postCommentsCount + 1);
             $comment->updated_at = $postCreatedAt->addHour($postCommentsCount  + 1);
             $comment->save();
