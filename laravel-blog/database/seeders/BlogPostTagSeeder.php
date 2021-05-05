@@ -21,7 +21,7 @@ class BlogPostTagSeeder extends Seeder
             $this->command->info('No tags found, skipping assigning tags to blog posts');
         }
 
-        $howManyMin = (int)$this->command->ask('Minimum tags on blog post?', 0);
+        $howManyMin = (int)$this->command->ask('Minimum tags on blog post?', 1);
         $howManyMax = min((int)$this->command->ask('Maximum tags on blog post?', $tagCount), $tagCount);
 
         BlogPost::all()->each(function ($post) use ($howManyMin, $howManyMax) {
