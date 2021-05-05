@@ -1,3 +1,5 @@
+<x-errors></x-errors>
+
 <div class="form-group">
     <label for="title">Title</label>
     <input class="form-control @error('title') is-invalid @enderror" name="title" type="text"
@@ -8,5 +10,3 @@
     <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content"
         rows="15">{{ old('content', optional($post ?? null)->content) }}</textarea>
 </div>
-
-<x-errors></x-errors>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostTagController;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,12 @@ $posts = [
     ],
 ];
 
+Auth::routes();
+
 Route::resource('posts', PostController::class);
+
+Route::resource('posts.comments', PostCommentController::class)
+    ->only(['store']);
 
 Route::get('/posts/tag/{id}', [PostTagController::class, 'index'])
     ->name('posts.tags.index');
@@ -93,5 +99,3 @@ Route::prefix('/fun')
             return response()->download(public_path('/favicon.ico'));
         })->name('download');
     });
-
-Auth::routes();
