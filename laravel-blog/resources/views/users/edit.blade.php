@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col-4">
-                <img src="" alt="user image" class="img-thumbnail avatar">
+                <img src="" alt="user image" class="img-thumbnail avatar rounded">
                 <div class="card mt-4">
                     <div class="card-body">
                         <h6>Upload a different photo</h6>
