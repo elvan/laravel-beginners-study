@@ -47,22 +47,11 @@
                 @endauth
             </div>
 
-            @include('comments._form')
+            <x-comment-form :route="route('posts.comments.store', ['post' => $post])"></x-comment-form>
 
             <h4>Comments</h4>
             <div>
-                @forelse ($post->comments as $comment)
-                    <?php $lines = preg_split('#\R+#', $comment->content); ?>
-                    @foreach ($lines as $line)
-                        <p>{{ $line }}</p>
-                    @endforeach
-
-                    <x-updated :date="$comment->created_at" :name="$comment->user->name" />
-
-                    <hr>
-                @empty
-                    <p>No comments yet!</p>
-                @endforelse
+                <x-comment-list :comments="$post->comments"></x-comment-list>
             </div>
 
         </div>

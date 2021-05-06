@@ -9,7 +9,15 @@
 
         <div class="col-8">
             <h3>{{ $user->name }}</h3>
+
             <a class="btn btn-primary" href="{{ route('users.edit', ['user' => $user]) }}">Edit profile</a>
+
+            <x-comment-form :route="route('users.comments.store', ['user' => $user])"></x-comment-form>
+
+            <h4>Comments</h4>
+            <div>
+                <x-comment-list :comments="$user->commentsOn"></x-comment-list>
+            </div>
         </div>
     </div>
 @endsection
