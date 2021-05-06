@@ -10,3 +10,8 @@
     <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content"
         rows="15">{{ old('content', optional($post ?? null)->content) }}</textarea>
 </div>
+
+<div class="form-group">
+    <label for="thumbnail">Thumbnail</label>
+    <input class="form-control-file @error('thumbnail') is-invalid @enderror" name="thumbnail" type="file">
+</div>
