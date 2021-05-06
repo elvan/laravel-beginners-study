@@ -90,7 +90,8 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->route('users.show', ['user' => $user]);
+        return redirect()->route('users.show', ['user' => $user])
+            ->with('status', 'Profile was updated');
     }
 
     /**
