@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Tag;
 use App\Models\User;
 use App\Scopes\DeletedAdminScope;
@@ -38,7 +39,7 @@ class BlogPost extends Model
 
     public function image()
     {
-        return $this->hasOne(Image::class);
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     public function scopeLatest(Builder $query)
