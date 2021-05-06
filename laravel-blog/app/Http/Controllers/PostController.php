@@ -24,12 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::latest()
-            ->withCount('comments')
-            ->with('user')
-            ->with('tags')
-            ->get();
-
+        $posts = BlogPost::latestWithRelations()->get();
 
         return view('posts.index', ['posts' => $posts]);
     }
