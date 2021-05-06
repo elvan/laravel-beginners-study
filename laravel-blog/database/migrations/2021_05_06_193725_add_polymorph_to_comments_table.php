@@ -31,7 +31,7 @@ class AddPolymorphToCommentsTable extends Migration
             $table->dropMorphs('commentable');
             $table->unsignedBigInteger('blog_post_id')
                 ->index();
-            $table->foreign(['blog_post_id'])
+            $table->foreign('blog_post_id')
                 ->references('id')
                 ->on('blog_posts');
         });

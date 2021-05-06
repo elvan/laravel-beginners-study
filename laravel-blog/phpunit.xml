@@ -29,10 +29,10 @@
                 value="array" />
         <server
                 name="DB_CONNECTION"
-                value="sqlite_testing" />
+                value="mysql_testing" />
         <server
                 name="DB_DATABASE"
-                value=":memory:" />
+                value="laravel_beginners_testing" />
         <server
                 name="MAIL_MAILER"
                 value="array" />
