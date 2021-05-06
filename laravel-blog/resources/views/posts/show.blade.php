@@ -22,7 +22,7 @@
                 <p>{{ $paragraph }}</p>
             @endforeach
 
-            <x-updated :date="$post->created_at" :name="$post->user->name" />
+            <x-updated :date="$post->created_at" :name="$post->user->name" :userId="$post->user->id" />
 
             <x-tags :tags="$post->tags" />
 
