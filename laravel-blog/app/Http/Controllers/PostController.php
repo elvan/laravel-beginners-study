@@ -54,7 +54,7 @@ class PostController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('thumbnails');
-            $blogPost->image()->save(Image::create(['path' => $path]));
+            $blogPost->image()->save(Image::make(['path' => $path]));
         }
 
         $request->session()->flash('status', 'The blog post was created!');
@@ -158,7 +158,7 @@ class PostController extends Controller
                 $blogPost->image->path = $path;
                 $blogPost->image->save();
             } else {
-                $blogPost->image()->save(Image::create(['path' => $path]));
+                $blogPost->image()->save(Image::make(['path' => $path]));
             }
         }
 
