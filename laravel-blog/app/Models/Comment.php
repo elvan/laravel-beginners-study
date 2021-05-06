@@ -17,9 +17,9 @@ class Comment extends Model
 
     protected $fillable = ['user_id', 'content'];
 
-    public function blogPost()
+    public function commentable()
     {
-        return $this->belongsTo(BlogPost::class);
+        return $this->morphTo();
     }
 
     public function user()
@@ -32,8 +32,10 @@ class Comment extends Model
         parent::boot();
 
         static::creating(function (Comment $comment) {
-            Cache::forget("blog-post-{$comment->blog_post_id}");
-            Cache::forget("mostCommented");
+            if ($comment->commentable_type == BlogPost::class) {
+                Cache::forget("blog-post-{$comment->commentable_id}");
+                Cache::forget("mostCommented");
+            }
         });
     }
 

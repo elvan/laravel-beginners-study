@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $userCount = max((int) $this->command->ask('How many users would you create?', 65), 1);
+        $userCount = max((int) $this->command->ask('How many users would you create?', 19), 1);
         $exampleUser = User::factory()->exampleUser()->create();
         $exampleUser->image()->save(Image::make(['path' => "diverseui/image-{$exampleUser->id}.png"]));
 
