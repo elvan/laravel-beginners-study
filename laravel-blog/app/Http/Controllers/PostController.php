@@ -70,10 +70,12 @@ class PostController extends Controller
     public function show($id)
     {
         $blogPost = Cache::remember("blog-post-{$id}", now()->addMinute(), function () use ($id) {
-            return BlogPost::with('comments')
-                ->with('user')
-                ->with('tags')
-                ->findOrFail($id);
+            return BlogPost::with([
+                'comments',
+                'comments.user',
+                'user',
+                'tags',
+            ])->findOrFail($id);
         });
 
         $sessionId = session()->getId();
