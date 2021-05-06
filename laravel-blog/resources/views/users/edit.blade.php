@@ -8,7 +8,8 @@
 
         <div class="row">
             <div class="col-4">
-                <img src="" alt="user image" class="img-thumbnail avatar rounded">
+                <img src="{{ $user->image ? $user->image->url() : '' }}" alt="user image"
+                    class="img-thumbnail avatar rounded">
                 <div class="card mt-4">
                     <div class="card-body">
                         <h6>Upload a different photo</h6>
@@ -20,7 +21,7 @@
             <div class="col-8">
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input class="form-control" id="name" name="name" value="" type="text">
+                    <input class="form-control" id="name" name="name" type="text" value="{{ old('name') ?? $user->name }}">
                 </div>
                 <div class="form-group">
                     <input class="btn btn-primary" type="submit" value="Save Changes">
