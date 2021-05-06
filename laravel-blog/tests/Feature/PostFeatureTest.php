@@ -38,7 +38,9 @@ class PostFeatureTest extends TestCase
     {
         $post = $this->createDummyBlogPost();
         Comment::factory()->count(3)->create([
-            'blog_post_id' => $post->id
+            'user_id' => $this->user()->id,
+            'commentable_id' => $post->id,
+            'commentable_type' => BlogPost::class,
         ]);
 
         $response = $this->get('/posts');
