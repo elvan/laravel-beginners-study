@@ -1,8 +1,10 @@
+@props(['route'])
+
 <x-errors></x-errors>
 
 <div class="mt-2 mb-2">
     @auth
-        <form action="{{ route('posts.comments.store', ['post' => $post->id]) }}" method="POST">
+        <form action="{{ $route }}" method="POST">
             @csrf
 
             <div>
@@ -11,7 +13,7 @@
                     <textarea class="form-control" name="content" id="content" rows="15"></textarea>
                 </div>
 
-                <input class="btn btn-primary btn-block" type="submit" value="Add comment">
+                <button class="btn btn-primary btn-block" type="submit">Add comment</button>
             </div>
         </form>
     @else
