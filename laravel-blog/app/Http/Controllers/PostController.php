@@ -144,15 +144,28 @@ class PostController extends Controller
      */
     public function update(StorePost $request, $id)
     {
-        $post = BlogPost::findOrFail($id);
+        $blogPost = BlogPost::findOrFail($id);
         $validated = $request->validated();
 
-        $this->authorize($post);
-        $post->fill($validated);
-        $post->save();
+        $this->authorize($blogPost);
+        $blogPost->fill($validated);
+
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('thumbnails');
+
+            if ($blogPost->image) {
+                Storage::delete($blogPost->image->path);
+                $blogPost->image->path = $path;
+                $blogPost->image->save();
+            } else {
+                $blogPost->image()->save(Image::create(['path' => $path]));
+            }
+        }
+
+        $blogPost->save();
         $request->session()->flash('status', 'The blog post was updated!');
 
-        return redirect()->route('posts.show', ['post' => $post]);
+        return redirect()->route('posts.show', ['post' => $blogPost]);
     }
 
     /**
