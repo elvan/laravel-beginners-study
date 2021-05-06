@@ -13,7 +13,9 @@
                 <x-badge type="success" :message="'New'" :show="$show" />
             </h1>
 
-            <img class="img-fluid rounded" src="{{ $post->image->url() }}" alt="{{ $post->title }}">
+            @if ($post->image)
+                <img class="img-fluid rounded mb-3" src="{{ $post->image->url() }}" alt="{{ $post->title }}">
+            @endif
 
             <?php $paragraphs = preg_split('#\R+#', $post->content); ?>
             @foreach ($paragraphs as $paragraph)
