@@ -23,22 +23,3 @@
         No comments yet
     </p>
 @endif
-
-<div class="mb-3">
-    @auth
-        @can('update', $post)
-            <a class="btn btn-primary" href="{{ route('posts.edit', ['post' => $post->id]) }}">
-                Edit
-            </a>
-        @endcan
-        @can('delete', $post)
-            @unless($post->trashed())
-                <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="d-inline" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input class="btn btn-danger" type="submit" value="Delete" />
-                </form>
-            @endunless
-        @endcan
-    @endauth
-</div>

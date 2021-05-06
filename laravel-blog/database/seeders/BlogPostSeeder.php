@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\BlogPost;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
@@ -27,6 +28,7 @@ class BlogPostSeeder extends Seeder
 
             $post->user_id = $users->random()->id;
             $post->save();
+            $post->image()->save(Image::make(['path' => "diverseui-05-07/image-{$i}.png"]));
         }
     }
 }
