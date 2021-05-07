@@ -19,8 +19,8 @@ class CommentSeeder extends Seeder
         $posts = BlogPost::all();
         $users = User::all();
 
-        if ($posts->count() < 1) {
-            $this->command->info('There are no blog posts, so no comments will be added');
+        if ($posts->count() === 0 || $users->count() === 0) {
+            $this->command->info('There are no blog posts or users, so no comments will be added');
         }
 
         $commentsCount = (int) $this->command->ask('How many comments would you create?', 200);
@@ -35,6 +35,19 @@ class CommentSeeder extends Seeder
             $comment->user_id = $users->random()->id;
             $comment->created_at = $postCreatedAt->addHour($postCommentsCount + 1);
             $comment->updated_at = $postCreatedAt->addHour($postCommentsCount  + 1);
+            $comment->save();
+        });
+
+        Comment::factory()->count($commentsCount)->make()->each(function ($comment) use ($users) {
+            $randomId = $users->random()->id;
+            $user = User::find($randomId);
+            $userCreatedAt = $user->created_at;
+            $userCommentsOnCount = $user->commentsOn()->count();
+            $comment->commentable_id = $randomId;
+            $comment->commentable_type = User::class;
+            $comment->user_id = $users->random()->id;
+            $comment->created_at = $userCreatedAt->addHour($userCommentsOnCount + 1);
+            $comment->updated_at = $userCreatedAt->addHour($userCommentsOnCount  + 1);
             $comment->save();
         });
     }

@@ -21,6 +21,7 @@ class BlogPostSeeder extends Seeder
         $users = User::all();
 
         for ($i = $postsCount; $i > 0; $i--) {
+            $imageIndex = $postsCount - $i;
             $post = BlogPost::factory()->make([
                 'created_at' => Carbon::now()->subDay($i),
                 'updated_at' => Carbon::now()->subHour($i),
@@ -28,7 +29,7 @@ class BlogPostSeeder extends Seeder
 
             $post->user_id = $users->random()->id;
             $post->save();
-            $post->image()->save(Image::make(['path' => "diverseui-05-07/image-{($postsCount - $i)}.png"]));
+            $post->image()->save(Image::make(['path' => "diverseui-05-07/image-{$imageIndex}.png"]));
         }
     }
 }
