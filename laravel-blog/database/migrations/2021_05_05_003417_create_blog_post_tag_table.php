@@ -15,19 +15,16 @@ class CreateBlogPostTagTable extends Migration
     {
         Schema::create('blog_post_tag', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('blog_post_id')->index();
             $table->foreign('blog_post_id')
                 ->references('id')
                 ->on('blog_posts')
                 ->cascadeOnDelete('cascade');
-
             $table->unsignedBigInteger('tag_id')->index();
             $table->foreign('tag_id')
                 ->references('id')
                 ->on('tags')
                 ->cascadeOnDelete('cascade');
-
             $table->timestamps();
         });
     }

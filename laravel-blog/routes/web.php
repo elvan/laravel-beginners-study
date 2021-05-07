@@ -46,9 +46,8 @@ $posts = [
     ],
 ];
 
-Auth::routes();
-
-Route::resource('users', UserController::class)->only(['show', 'edit', 'update']);
+Route::resource('users', UserController::class)
+    ->only(['show', 'edit', 'update']);
 
 Route::resource('posts', PostController::class);
 
@@ -106,3 +105,5 @@ Route::prefix('/fun')
             return response()->download(public_path('/favicon.ico'));
         })->name('download');
     });
+
+Auth::routes();

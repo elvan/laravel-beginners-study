@@ -15,7 +15,6 @@ class AddUserToCommentsTable extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->default(0);
-
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
