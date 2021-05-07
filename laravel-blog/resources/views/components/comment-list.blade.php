@@ -6,6 +6,8 @@
         <p>{{ $line }}</p>
     @endforeach
 
+    <x-tags :tags="$comment->tags" />
+
     <x-updated :date="$comment->created_at" :name="$comment->user->name" :userId="$comment->user->id" />
 
     <hr>
