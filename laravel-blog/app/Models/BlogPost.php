@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Models\Comment;
 use App\Models\Image;
-use App\Models\Tag;
 use App\Models\User;
 use App\Scopes\DeletedAdminScope;
+use App\Traits\Taggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,18 +17,13 @@ class BlogPost extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Taggable;
 
     protected $fillable = ['user_id', 'title', 'content'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'taggable')
-            ->withTimestamps();
     }
 
     public function comments()

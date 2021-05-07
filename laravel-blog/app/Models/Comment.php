@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\BlogPost;
 use App\Models\User;
+use App\Traits\Taggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ class Comment extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Taggable;
 
     protected $fillable = ['user_id', 'content'];
 
@@ -25,12 +27,6 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'taggable')
-            ->withTimestamps();
     }
 
     public static function boot()
