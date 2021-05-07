@@ -15,4 +15,11 @@ class Tag extends Model
             ->withTimestamps()
             ->as('tagged');
     }
+
+    public function comments()
+    {
+        return $this->morphedByMany(Comment::class, 'taggable')
+            ->withTimestamps()
+            ->as('tagged');
+    }
 }
