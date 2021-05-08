@@ -26,7 +26,7 @@ class PostCommentController extends Controller
 
         Mail::to($post->user)->send(new CommentPostedMarkdown($comment));
 
-        NotifyUsersPostWasCommented::dispatch($comment);
+        NotifyUsersPostWasCommented::dispatchAfterResponse($comment);
 
         return redirect()
             ->back()
