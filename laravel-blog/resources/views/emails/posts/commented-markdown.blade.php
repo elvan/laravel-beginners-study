@@ -1,12 +1,20 @@
 @component('mail::message')
-# Introduction
+# Comment was posted on your blog post
 
-Example email from Laravel Blog App
+Hi {{ $comment->commentable->user->name }}
 
-@component('mail::button', ['url' => ''])
-Button Text
+Someone has commented on your blog post
+
+@component('mail::button', ['url' => route('posts.show', ['post' => $comment->commentable->id])])
+View The Blog Post
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+@component('mail::button', ['url' => route('users.show', ['user' => $comment->user->id])])
+Visit {{ $comment->user->name }} profile
+@endcomponent
+
+@component('mail::panel')
+{{ $comment->content }}
+@endcomponent
+
 @endcomponent
