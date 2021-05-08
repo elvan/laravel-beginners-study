@@ -16,6 +16,9 @@ class NotifyUsersPostWasCommented implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $tries = 3;
+    public $timout = 30;
+
     public $comment;
 
     /**
