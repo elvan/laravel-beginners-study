@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Cache;
 
 class BlogPost extends Model
 {
@@ -56,21 +55,6 @@ class BlogPost extends Model
     public static function boot()
     {
         static::addGlobalScope(new DeletedAdminScope());
-
-        static::deleting(function (BlogPost $blogPost) {
-            $blogPost->comments()->delete();
-            // $blogPost->image()->delete();
-            Cache::forget("blog-post-{$blogPost->id}");
-        });
-
-        static::restoring(function (BlogPost $blogPost) {
-            $blogPost->comments()->restore();
-        });
-
-        static::updating(function (BlogPost $blogPost) {
-            Cache::forget("blog-post-{$blogPost->id}");
-        });
-
         parent::boot();
     }
 }
