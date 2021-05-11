@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\CommentPosted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreComment;
+use App\Http\Resources\CommentResource;
 use App\Models\BlogPost;
 
 class PostCommentController extends Controller
@@ -18,7 +19,7 @@ class PostCommentController extends Controller
     {
         $blogPost = BlogPost::findOrFail($id);
 
-        return $blogPost->comments()->with('user')->get();
+        return CommentResource::collection($blogPost->comments);
     }
 
     public function store(BlogPost $post, StoreComment $request)
