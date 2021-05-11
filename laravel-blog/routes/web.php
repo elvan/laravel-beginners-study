@@ -54,7 +54,7 @@ Route::resource('users', UserController::class)
 Route::resource('posts', PostController::class);
 
 Route::resource('posts.comments', PostCommentController::class)
-    ->only(['store']);
+    ->only(['index', 'store']);
 
 Route::resource('users.comments', UserCommentController::class)
     ->only(['store']);
