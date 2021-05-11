@@ -10,6 +10,8 @@
         <div class="col-8">
             <h3>{{ $user->name }}</h3>
 
+            <p>Currently viewed by {{ $counter }} users</p>
+
             @auth
                 @can('update', $user)
                     <a class="btn btn-primary" href="{{ route('users.edit', ['user' => $user]) }}">Edit profile</a>
