@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Services\Counter;
+use Illuminate\Contracts\Cache\Factory;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,12 +29,16 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        // $this->app->singleton(Counter::class, function ($app) {
-        //     return new Counter(env('COUNTER_TIMEOUT', 3));
-        // });
+        $this->app->singleton(Counter::class, function ($app) {
+            return new Counter(
+                $app->make(Factory::class),
+                $app->make(Session::class),
+                env('COUNTER_TIMEOUT', 3)
+            );
+        });
 
-        $this->app->when(Counter::class)
-            ->needs('$timeout')
-            ->give(env('COUNTER_TIMEOUT', 3));
+        // $this->app->when(Counter::class)
+        //     ->needs('$timeout')
+        //     ->give(env('COUNTER_TIMEOUT', 3));
     }
 }
