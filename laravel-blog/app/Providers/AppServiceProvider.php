@@ -27,8 +27,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        $this->app->bind(Counter::class, function ($app) {
-            return new Counter(env('COUNTER_TIMEOUT', 3));
-        });
+        // $this->app->singleton(Counter::class, function ($app) {
+        //     return new Counter(env('COUNTER_TIMEOUT', 3));
+        // });
+
+        $this->app->when(Counter::class)
+            ->needs('$timeout')
+            ->give(env('COUNTER_TIMEOUT', 3));
     }
 }

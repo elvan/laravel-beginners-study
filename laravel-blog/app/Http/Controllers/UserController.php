@@ -11,11 +11,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    private $counter;
 
-    public function __construct()
+    public function __construct(Counter $counter)
     {
         $this->middleware('auth')->only(['edit', 'update']);
         $this->authorizeResource(User::class, 'user');
+
+        $this->counter = $counter;
     }
 
     /**
@@ -57,11 +60,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $counter = resolve(Counter::class);
-
         return view('users.show', [
             'user' => $user,
-            'counter' => $counter->increment("user-{$user->id}"),
+            'counter' => $this->counter->increment("user-{$user->id}"),
         ]);
     }
 
