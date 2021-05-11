@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\CounterContract;
 use App\Services\Counter;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Contracts\Session\Session;
@@ -40,5 +41,10 @@ class AppServiceProvider extends ServiceProvider
         // $this->app->when(Counter::class)
         //     ->needs('$timeout')
         //     ->give(env('COUNTER_TIMEOUT', 3));
+
+        $this->app->bind(
+            CounterContract::class,
+            Counter::class
+        );
     }
 }
