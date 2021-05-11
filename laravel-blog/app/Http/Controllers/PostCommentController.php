@@ -14,6 +14,13 @@ class PostCommentController extends Controller
         $this->middleware('auth')->only(['store']);
     }
 
+    public function index(int $id)
+    {
+        $blogPost = BlogPost::with('comments')->findOrFail($id);
+
+        return $blogPost->comments;
+    }
+
     public function store(BlogPost $post, StoreComment $request)
     {
         $comment = $post->comments()->create([
