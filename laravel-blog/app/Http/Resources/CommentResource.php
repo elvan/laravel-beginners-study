@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\CommentUserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
@@ -19,7 +20,7 @@ class CommentResource extends JsonResource
             'content' => $this->content,
             'created_at' => (string)$this->created_at,
             'updated_at' => (string)$this->updated_at,
-            'user' => new CommentUserResource($this->user),
+            'user' => new CommentUserResource($this->whenLoaded('user')),
         ];
     }
 }
