@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\CounterContract;
+use App\Http\Resources\CommentResource;
 use App\Services\Counter;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Contracts\Session\Session;
@@ -46,5 +47,7 @@ class AppServiceProvider extends ServiceProvider
             CounterContract::class,
             Counter::class
         );
+
+        CommentResource::withoutWrapping();
     }
 }
