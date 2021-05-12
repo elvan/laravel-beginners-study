@@ -33,3 +33,10 @@ Route::prefix('v2')->name('api.v2.')->group(function () {
         return response()->json(['status' => true]);
     })->name('status');
 });
+
+// ! The fallback route should always be the last route registered by your application.
+Route::fallback(function () {
+    return response()->json([
+        'message' => 'Not Found',
+    ], 404);
+})->name('api.fallback');
