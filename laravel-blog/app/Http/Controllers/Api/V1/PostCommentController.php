@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CommentResource;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class PostCommentController extends Controller
      */
     public function index(BlogPost $post)
     {
-        return response()->json(['comments' => []]);
+        return CommentResource::collection(
+            $post->comments()->with('user')->paginate()
+        );
     }
 
     /**
