@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'email_verified_at' => Carbon::now(),
+                'api_token' => Str::random(80),
             ]);
             $user->image()->save(Image::make(['path' => "diverseui/image-{$user->id}.png"]));
         }

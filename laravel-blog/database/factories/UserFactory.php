@@ -52,6 +52,7 @@ class UserFactory extends Factory
             return [
                 'name' => 'Example User',
                 'email' => 'user@example.com',
+                'api_token' => Str::random(80),
                 'is_admin' => true,
             ];
         });
