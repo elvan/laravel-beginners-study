@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (env('REDIRECT_HTTPS')) {
+            $url->forceScheme('https');
+        }
+
         Schema::defaultStringLength(191);
 
         $this->app->singleton(Counter::class, function ($app) {
