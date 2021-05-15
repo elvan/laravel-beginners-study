@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-4">
-            <img src="{{ $user->image ? $user->image->url() : '' }}" alt="user image"
+            <img src="{{ $user->image ? asset($user->image->path) : '' }}" alt="user image"
                 class="img-fluid img-thumbnail avatar rounded">
         </div>
 
