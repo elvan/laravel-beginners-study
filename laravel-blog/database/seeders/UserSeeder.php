@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     {
         $userCount = max((int) $this->command->ask('How many users would you create?', 9), 1);
         $exampleUser = User::factory()->exampleUser()->create();
-        $exampleUser->image()->save(Image::make(['path' => "images/image-{$exampleUser->id}.png"]));
+        $exampleUser->image()->save(Image::make(['path' => "../images/image-{$exampleUser->id}.png"]));
 
         for ($i = $userCount; $i > 0; $i--) {
             $user = User::factory()->create([
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => Carbon::now(),
                 'api_token' => Str::random(80),
             ]);
-            $user->image()->save(Image::make(['path' => "images/image-{$user->id}.png"]));
+            $user->image()->save(Image::make(['path' => "../images/image-{$user->id}.png"]));
         }
     }
 }
