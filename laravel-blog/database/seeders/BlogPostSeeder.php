@@ -29,7 +29,7 @@ class BlogPostSeeder extends Seeder
 
             $post->user_id = $users->random()->id;
             $post->save();
-            $post->image()->save(Image::make(['path' => "diverseui-05-07/image-{$imageIndex}.png"]));
+            $post->image()->save(Image::make(['path' => "diverseui/image-{$imageIndex}.png"]));
         }
     }
 }

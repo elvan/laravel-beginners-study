@@ -14,7 +14,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only(['edit', 'update']);
-        $this->authorizeResource(User::class, 'user');
+        // $this->authorizeResource(User::class, 'user');
     }
 
     /**
@@ -86,6 +86,7 @@ class UserController extends Controller
             $path = $request->file('avatar')->store('avatars');
 
             if ($user->image) {
+                // Storage::delete($user->image->path);
                 $user->image->path = $path;
                 $user->image->save();
             } else {
