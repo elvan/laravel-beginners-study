@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUser;
 use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -86,7 +87,8 @@ class UserController extends Controller
             $path = $request->file('avatar')->store('avatars');
 
             if ($user->image) {
-                // Storage::delete($user->image->path);
+                Storage::delete($user->image->path);
+
                 $user->image->path = $path;
                 $user->image->save();
             } else {

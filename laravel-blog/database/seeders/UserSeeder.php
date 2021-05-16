@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Image;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
@@ -18,17 +17,15 @@ class UserSeeder extends Seeder
     public function run()
     {
         $userCount = max((int) $this->command->ask('How many users would you create?', 9), 1);
-        $exampleUser = User::factory()->exampleUser()->create();
-        $exampleUser->image()->save(Image::make(['path' => "../images/image-{$exampleUser->id}.png"]));
+        User::factory()->exampleUser()->create();
 
         for ($i = $userCount; $i > 0; $i--) {
-            $user = User::factory()->create([
+            User::factory()->create([
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'email_verified_at' => Carbon::now(),
                 'api_token' => Str::random(80),
             ]);
-            $user->image()->save(Image::make(['path' => "../images/image-{$user->id}.png"]));
         }
     }
 }
