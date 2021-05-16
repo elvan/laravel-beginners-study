@@ -3,8 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-4">
-            <img src="{{ $user->image ? $user->image->url() : '' }}" alt="user image"
-                class="img-fluid img-thumbnail avatar rounded">
+            @if ($user->image)
+                <img src="{{ $user->image->url() }}" alt="user image" class="img-fluid img-thumbnail avatar rounded">
+            @endif
         </div>
 
         <div class="col-8">

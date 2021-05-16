@@ -123,7 +123,8 @@ class PostController extends Controller
             $path = $request->file('thumbnail')->store('thumbnails');
 
             if ($blogPost->image) {
-                // Storage::delete($blogPost->image->path);
+                Storage::delete($blogPost->image->path);
+
                 $blogPost->image->path = $path;
                 $blogPost->image->save();
             } else {
