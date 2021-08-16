@@ -1,1 +1,1 @@
-# laravel-fundamentals-study
+# laravel-study
