@@ -9,23 +9,23 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "barryvdh/laravel-debugbar": "^v3.6.7",
-        "fakerphp/faker": "^v1.19.0",
-        "fideloper/proxy": "^4.4.1",
+        "barryvdh/laravel-debugbar": "v3.7.0",
+        "fakerphp/faker": "v1.20.0",
+        "fideloper/proxy": "^4.4.2",
         "fruitcake/laravel-cors": "^v2.2.0",
-        "guzzlehttp/guzzle": "^7.4.2",
-        "laravel/framework": "^v8.83.5",
-        "laravel/tinker": "^v2.7.1",
-        "laravel/ui": "^v3.4.5",
-        "league/flysystem-aws-s3-v3": "^1.0.29",
+        "guzzlehttp/guzzle": "^7.5.0",
+        "laravel/framework": "v8.83.26",
+        "laravel/tinker": "v2.7.3",
+        "laravel/ui": "v3.4.6",
+        "league/flysystem-aws-s3-v3": "^1.0.30",
         "league/flysystem-cached-adapter": "^1.1.0"
     },
     "require-dev": {
-        "facade/ignition": "^2.17.5",
-        "laravel/sail": "^v1.13.7",
-        "mockery/mockery": "^1.5.0",
+        "facade/ignition": "^2.17.6",
+        "laravel/sail": "v1.16.2",
+        "mockery/mockery": "^1.5.1",
         "nunomaduro/collision": "^v5.11.0",
-        "phpunit/phpunit": "^9.5.19"
+        "phpunit/phpunit": "^9.5.26"
     },
     "autoload": {
         "psr-4": {
