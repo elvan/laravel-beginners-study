@@ -11,21 +11,21 @@
         "php": "^8.0",
         "barryvdh/laravel-debugbar": "^v3.7.0",
         "fakerphp/faker": "^v1.21.0",
-        "fideloper/proxy": "^4.4.0",
+        "fideloper/proxy": "^4.4.2",
         "fruitcake/laravel-cors": "^v2.2.0",
         "guzzlehttp/guzzle": "^7.5.0",
-        "laravel/framework": "^v8.83.0",
-        "laravel/tinker": "^v2.7.3",
-        "laravel/ui": "^v3.4.0",
-        "league/flysystem-aws-s3-v3": "^1.0.0",
+        "laravel/framework": "^v8.83.27",
+        "laravel/tinker": "^v2.8.0",
+        "laravel/ui": "^v3.4.6",
+        "league/flysystem-aws-s3-v3": "^1.0.30",
         "league/flysystem-cached-adapter": "^1.1.0"
     },
     "require-dev": {
-        "facade/ignition": "^2.17.0",
-        "laravel/sail": "^v1.17.0",
+        "facade/ignition": "^2.17.7",
+        "laravel/sail": "^v1.18.1",
         "mockery/mockery": "^1.5.1",
         "nunomaduro/collision": "^v5.11.0",
-        "phpunit/phpunit": "^9.5.0"
+        "phpunit/phpunit": "^9.5.28"
     },
     "autoload": {
         "psr-4": {
