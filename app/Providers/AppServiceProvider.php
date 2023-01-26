@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
-        if (env('REDIRECT_HTTPS')) {
+        if (env('APP_ENV') == 'production') {
             $url->forceScheme('https');
         }
 
@@ -43,10 +43,6 @@ class AppServiceProvider extends ServiceProvider
                 env('COUNTER_TIMEOUT', 3)
             );
         });
-
-        // $this->app->when(Counter::class)
-        //     ->needs('$timeout')
-        //     ->give(env('COUNTER_TIMEOUT', 3));
 
         $this->app->bind(
             CounterContract::class,
